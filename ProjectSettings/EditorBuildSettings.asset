@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Performance test (Particle system).unity
+    guid: 6cf25232124843d42b4573185f31c4cb
   m_configObjects: {}
