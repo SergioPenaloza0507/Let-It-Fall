@@ -233,13 +233,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36b4a4daefeebab40984998a977bdc51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxParticles: 100
+  maxParticles: 20
   dt: 0.01
-  minMass: 0.1
-  maxMass: 2
+  minMass: 1
+  maxMass: 1
   maxVelocity: 20
-  drag: 0
-  gravityMultiplier: 0.1
+  drag: 0.2
+  gravityMultiplier: 1
   radius: 0.2
   visualizationGradient:
     serializedVersion: 2

@@ -24,14 +24,18 @@ public class ParticleTest : MonoBehaviour
     [SerializeField] private SurfaceCollider[] colliders;
 
     private float time = 0;
+
+    private Vector3 SolvedVel;
+    
+    bool velCol;
     // Start is called before the first frame update
     void Start()
     {
         particles = new ParticleGPU[maxParticles];
         for (int i = 0; i < particles.Length; i++)
         {
-            Vector3 randompos = new Vector3( Random.Range(-3,3),Random.Range(-3,3),0);
-            particles[i] = new ParticleGPU(transform.position + randompos,Vector3.zero, Random.Range(minMass,maxMass));
+            Vector3 randompos = new Vector3( Random.Range(-3,3),Random.Range(-3,3),Random.Range(-3,3));
+            particles[i] = new ParticleGPU(transform.position + randompos,-randompos, Random.Range(minMass,maxMass));
         }
     }
 
@@ -48,9 +52,9 @@ public class ParticleTest : MonoBehaviour
 
     void UpdateSolver()
     {
-        SolveCollisions();
+        if(velCol)
+            SolveCollisions();
         SolveVelocities();
-
         SolvePositions();
     }
 
@@ -63,54 +67,47 @@ public class ParticleTest : MonoBehaviour
     }
     void SolveVelocities()
     {
+        print("Solving Velocities");
         for (int i = 0; i < particles.Length; i++)
         {
             particles[i].velocity +=
                                     ((Vector3.down * 9.8f * gravityMultiplier + (-particles[i].velocity * drag)) * dt);
-
-            particles[i].velocity = Vector3.ClampMagnitude(particles[i].velocity, maxVelocity);
         }
+        velCol = !velCol;
     }
     
     void SolveCollisions()
     {
-        int index = 0;
-        for (index = 0; index < particles.Length; index++)
+        print("Solving Collisions");
+        for (int index = 1; index < particles.Length; index++)
         {
-            foreach (var p in particles)
+            for (int i = 0; i < particles.Length; i++)
             {
-                if (Vector3.Distance(particles[index].position, p.position) < radius)
+                if ((particles[index].position - particles[i].position).magnitude < radius && index != i)
                 {
-                    Collide(particles[index],p);
-                }
-            }
-
-            foreach (var s in colliders)
-            {
-                for (int i = 1; i < s.Definition.Length; i++)
-                {
-                    if ((s.Definition[i - 1] - s.Definition[i]).x < radius &&
-                        (s.Definition[i - 1] - s.Definition[i]).y < radius)
-                    {
-                        print("Collided");
-                        Collide(particles[i],s);
-                        break;
-                    }
+                    Debug.Log((particles[index].position - particles[0].position).magnitude < radius);
+//                    Debug.LogFormat("Current Magnitude: {0}",(particles[0].position - particles[1].position ).magnitude);
+//                    Debug.LogFormat("Current Velocity(1): {0},Current Velocity(2): {1}",particles[0].velocity,particles[1].velocity);
+                    Collide(particles[index],particles[i]);
                 }
             }
         }
     }
 
+    
+    /// <summary>
+    /// Assigns velocity to particle b from particle a's kinetic energy
+    /// </summary>
+    /// <param name="a">Query particle</param>
+    /// <param name="b">Collided particle</param>
     void Collide(ParticleGPU a, ParticleGPU b)
     {
-        Vector3 energyA = (1/2) * a.mass * a.velocity;
-        Vector3 energyB = (1/2) * b.mass * b.velocity;
-        Vector3 temp = energyA;
-        energyA += -energyB;
-        energyB += -temp;
-        Vector3 ta = (2 * energyA) / a.mass;
-        Vector3 tb = (2 * energyB) / b.mass;
-        b.velocity = new Vector3(Random.Range(-radius,radius),Random.Range(-radius,radius),Random.Range(-radius,radius)) * 10;
+        Vector3 energyAone = (1/2) * a.mass * Vector3.Scale(a.velocity,a.velocity);
+        Vector3 energyBtwo = (1/2) * b.mass * Vector3.Scale(b.velocity,b.velocity);
+        Vector3 squaredVel = (a.mass / b.mass) * Vector3.Scale(a.velocity,a.velocity);
+        
+        b.velocity = new Vector3(Mathf.Sqrt(squaredVel.x),Mathf.Sqrt(squaredVel.y),Mathf.Sqrt(squaredVel.z));
+        SolvedVel = b.velocity;
     }
     void Collide(ParticleGPU a, SurfaceCollider s)
     {
@@ -121,11 +118,17 @@ public class ParticleTest : MonoBehaviour
     {
         try
         {
+            
+
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawLine(Vector3.zero,SolvedVel);
+            Gizmos.DrawCube(SolvedVel,Vector3.one * 0.1f);
             foreach (var p in particles)
             {
                 Gizmos.color = visualizationGradient.Evaluate( p.velocity.magnitude / maxVelocity);
                 Gizmos.DrawSphere(p.position, radius * p.mass);
-                Gizmos.DrawLine(p.position,p.position  + p.velocity.normalized);
+                Gizmos.DrawWireSphere(p.position, radius);
+                Gizmos.DrawLine(p.position,p.position + p.velocity);
             }
         }
         catch (Exception error)
@@ -135,27 +138,16 @@ public class ParticleTest : MonoBehaviour
     }
 }
 
-public struct ParticleGPU
+public class ParticleGPU
 {
     public Vector3 position;
     public Vector3 velocity;
     public float mass;
-
+    public bool collided;
     public ParticleGPU(Vector3 _position, Vector3 _velocity,float _mass)
     {
         position = _position;
         velocity = _velocity;
         mass = _mass;
-    }
-        
-        
-    public static bool operator ==(ParticleGPU a, ParticleGPU b)
-    {
-        return a.GetHashCode() == b.GetHashCode() && a.position == b.position && a.velocity == b.velocity;
-    }
-
-    public static bool operator !=(ParticleGPU a, ParticleGPU b)
-    {
-        return a.GetHashCode() != b.GetHashCode() || a.position != b.position || a.velocity != b.velocity;
     }
 }
