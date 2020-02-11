@@ -13,8 +13,14 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Utilities/SetFloatToText.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GPU Particles/DataStructures/ThreeDimensionalKernel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GPU Particles/Algorithm test/SurfaceCollider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Utilities/FPSToText.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GPU Particles/Algorithm test/ParticleTest.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GPU Particles/DataStructures/Grid.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GPU Particles/ScriptableObject Definitions/SimulationSettings.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Testing/ParticleController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GPU Particles/DataStructures/ParticleContainer.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -22,6 +28,15 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Utilities/FPSToText.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Testing/ParticleController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Utilities/SetFloatToText.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GPU Particles/ScriptableObject Definitions/SimulationSettings.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GPU Particles/DataStructures/Grid.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GPU Particles/DataStructures/ParticleContainer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GPU Particles/DataStructures/3DKernel.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GPU Particles/DataStructures/ThreeDimensionalKernel.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GPU Particles/Algorithm test/LineCollider.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GPU Particles/Algorithm test/DustPhysicsManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GPU Particles/Algorithm test/SurfaceCollider.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GPU Particles/Algorithm test/ParticleTest.cs" />
       </list>
     </option>
   </component>
@@ -71,20 +86,24 @@
       <option name="presentableId" value="Default" />
       <updated>1580937031409</updated>
       <workItem from="1580937036767" duration="2774000" />
+      <workItem from="1580943163796" duration="12841000" />
+      <workItem from="1581024735089" duration="6250000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="UnityProjectConfiguration" hasMinimizedUI="null" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

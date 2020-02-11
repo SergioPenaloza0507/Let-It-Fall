@@ -7,6 +7,20 @@
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
+          <e p="GPU Particles" t="Include">
+            <e p="Algorithm test" t="Include">
+              <e p="ParticleTest.cs" t="Include" />
+              <e p="SurfaceCollider.cs" t="Include" />
+            </e>
+            <e p="DataStructures" t="Include">
+              <e p="Grid.cs" t="Include" />
+              <e p="ParticleContainer.cs" t="Include" />
+              <e p="ThreeDimensionalKernel.cs" t="Include" />
+            </e>
+            <e p="ScriptableObject Definitions" t="Include">
+              <e p="SimulationSettings.cs" t="Include" />
+            </e>
+          </e>
           <e p="Testing" t="Include">
             <e p="ParticleController.cs" t="Include" />
           </e>
