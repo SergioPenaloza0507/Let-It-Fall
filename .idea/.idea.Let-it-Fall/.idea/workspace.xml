@@ -14,12 +14,18 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Utilities/SetFloatToText.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GPU Particles/DataStructures/ThreeDimensionalKernel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Obstacles/MeshGenerator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Input/Swipe.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GPU Particles/ScriptableObject Definitions/SimulationSettings.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Utilities/Delegates.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Obstacles/Obstacle.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Testing/ParticleController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GPU Particles/Algorithm test/SurfaceCollider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Utilities/FPSToText.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GPU Particles/Algorithm test/ParticleTest.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Input/InputHandler.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Obstacles/ObstacleCreator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GPU Particles/DataStructures/Grid.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GPU Particles/ScriptableObject Definitions/SimulationSettings.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Testing/ParticleController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GPU Particles/DataStructures/ParticleContainer.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -37,6 +43,12 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/GPU Particles/Algorithm test/DustPhysicsManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GPU Particles/Algorithm test/SurfaceCollider.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GPU Particles/Algorithm test/ParticleTest.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Utilities/Delegates.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Input/Swipe.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Obstacles/Obstacle.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Input/InputHandler.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Obstacles/ObstacleCreator.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Obstacles/MeshGenerator.cs" />
       </list>
     </option>
   </component>
@@ -88,7 +100,8 @@
       <workItem from="1580937036767" duration="2774000" />
       <workItem from="1580943163796" duration="12841000" />
       <workItem from="1581024735089" duration="6250000" />
-      <workItem from="1581420440355" duration="4223000" />
+      <workItem from="1581420440355" duration="9156000" />
+      <workItem from="1581565221592" duration="3291000" />
     </task>
     <servers />
   </component>

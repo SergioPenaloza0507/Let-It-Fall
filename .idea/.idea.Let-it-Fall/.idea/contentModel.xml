@@ -21,10 +21,20 @@
               <e p="SimulationSettings.cs" t="Include" />
             </e>
           </e>
+          <e p="Input" t="Include">
+            <e p="InputHandler.cs" t="Include" />
+            <e p="Swipe.cs" t="Include" />
+          </e>
+          <e p="Obstacles" t="Include">
+            <e p="MeshGenerator.cs" t="Include" />
+            <e p="Obstacle.cs" t="Include" />
+            <e p="ObstacleCreator.cs" t="Include" />
+          </e>
           <e p="Testing" t="Include">
             <e p="ParticleController.cs" t="Include" />
           </e>
           <e p="Utilities" t="Include">
+            <e p="Delegates.cs" t="Include" />
             <e p="FPSToText.cs" t="Include" />
             <e p="SetFloatToText.cs" t="Include" />
           </e>
