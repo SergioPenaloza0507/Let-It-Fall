@@ -8,11 +8,14 @@ using Vector3 = UnityEngine.Vector3;
 
 public class ObstacleCreator : MonoBehaviour
 {
+    private static ObstacleCreator instance;
+    
+    public event Action<Vector3[]> OnPathUpdated;
+    
     [Header("Path parameters")]
-    [SerializeField] private float zValue;
-    [SerializeField] private int vertexDensity;
-    [SerializeField] private float newVertexDelta;
+    [SerializeField] private float spacing;
     [SerializeField] private LayerMask collisionLayer;
+    [SerializeField] [Range(0,1)] private float maxAngleThreshold;
     
     [Header("Mesh parameters")]
     [SerializeField] private float extrusion;
@@ -22,10 +25,15 @@ public class ObstacleCreator : MonoBehaviour
     
     
     
-    [SerializeField]private List<Vector3> vertices;
+    private List<Vector3> vertices;
     private List<Vector3> normals;
     
     int obstacleIndex;
+    private void Awake()
+    {
+        GetInstance();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -71,24 +79,68 @@ public class ObstacleCreator : MonoBehaviour
             
             if (CastRayFromCam(touchpos, out h))
             {
-                if ((h.point - vertices[vertices.Count - 1]).magnitude >= newVertexDelta)
+                if ((h.point - vertices[vertices.Count - 1]).magnitude >= spacing)
                 {
-                    vertices.Add(h.point);
-                    if (normals.Count < vertices.Count)
+                    if (vertices.Count > 2)
                     {
-                        normals.Add(Vector3.Cross(vertices[vertices.Count - 1] - vertices[0], Vector3.forward));
+                        if (Vector3.Dot((vertices[vertices.Count - 1] - vertices[vertices.Count - 2]).normalized,
+                                (vertices[vertices.Count - 2] - vertices[vertices.Count - 3]).normalized) >
+                            maxAngleThreshold)
+                        {
+                            vertices.Add(h.point);
+                        }
+                        if (normals.Count < vertices.Count)
+                        {
+                            normals.Add(Vector3.Cross((vertices[vertices.Count - 1] - vertices[0]).normalized, Vector3.forward));
+                        }
+//
+                        normals.Add(Vector3.Cross(vertices[vertices.Count - 1] - vertices[vertices.Count - 2],
+                            Vector3.forward).normalized);
+                    }
+                    else
+                    {
+                        vertices.Add(h.point);
+                        if (normals.Count < vertices.Count)
+                        {
+                            normals.Add(Vector3.Cross((vertices[vertices.Count - 1] - vertices[0]).normalized, Vector3.forward));
+                        }
+//
+                        normals.Add(Vector3.Cross(vertices[vertices.Count - 1] - vertices[vertices.Count - 2],
+                            Vector3.forward).normalized);
                     }
 
-                    normals.Add(Vector3.Cross(vertices[vertices.Count - 1] - vertices[vertices.Count - 2],Vector3.forward).normalized);
+//                    Vector2 derivative = ((vertices[vertices.Count - 1] - vertices[vertices.Count - 2]).normalized + Vector3.one * 0.001f )- (vertices[vertices.Count - 1] - vertices[vertices.Count - 2]).normalized;
+//                    derivative /= 0.001f;
+//                    normals.Add(derivative.normalized);
                 }
             }
+            OnPathUpdated?.Invoke(vertices.ToArray());
         }
+    }
+
+    void CalculateNormals()
+    {
+        //1. Find the bisector of the gratest angle
+        //2. Create a normal vector from that bisector
+        //3. Add the normal vector to the arrray
+        
+        normals.Add(Vector3.Cross((vertices[1]-vertices[0]).normalized,Vector3.forward));
+        
+        for (int i = 1; i < vertices.Count - 1; i++)
+        {
+            Vector3 lastSegment = (vertices[i] - vertices[i - 1]).normalized;
+            Vector3 nextSegment = (vertices[i + 1] - vertices[i]).normalized;
+            normals.Add((lastSegment + nextSegment).normalized);
+        }
+        
+        normals.Add(Vector3.Cross((vertices[vertices.Count-1]-vertices[vertices.Count-2]).normalized,Vector3.forward));
     }
 
     void CreateObstacle()
     {
         if (vertices.Count > 1)
         {
+            
             GameObject g = new GameObject(String.Format("OBSTACLE ({0})", obstacleIndex));
             MeshRenderer mr = g.AddComponent<MeshRenderer>();
             MeshFilter mf = g.AddComponent<MeshFilter>();
@@ -122,7 +174,21 @@ public class ObstacleCreator : MonoBehaviour
         h = hit;
         return false;
     }
-    
+
+    public static ObstacleCreator Instance => instance;
+
+    void GetInstance()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(this);
+        }
+    }
+
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {

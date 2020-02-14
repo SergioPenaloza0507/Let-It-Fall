@@ -9,6 +9,8 @@ using Vector3 = UnityEngine.Vector3;
 public class ParticleTest : MonoBehaviour
 {
 
+    
+    
     [SerializeField] private int maxParticles;
     [SerializeField] private float dt;
     [SerializeField] private float minMass;
