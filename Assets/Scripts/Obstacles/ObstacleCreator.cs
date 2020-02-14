@@ -22,9 +22,6 @@ public class ObstacleCreator : MonoBehaviour
     [SerializeField] private float thickness;
     [SerializeField] private Material meshMaterial;
 
-    
-    
-    
     private List<Vector3> vertices;
     private List<Vector3> normals;
     
