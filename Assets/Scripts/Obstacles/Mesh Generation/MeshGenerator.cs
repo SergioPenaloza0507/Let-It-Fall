@@ -14,12 +14,12 @@ public class MeshGenerator : MonoBehaviour
 
         for (int i = 0; i < positions.Length; i++)
         {
-            vertices.Add(positions[i] + normals[i] * extrusion);
-            vertices.Add(positions[i] + -normals[i] * extrusion);
+            vertices.Add(positions[i] + normals[i] * thickness);
+            vertices.Add(positions[i] + -normals[i] * thickness);
         }
 
         bool reverseTriangle = false;
-        for (int i = 1; i < vertices.Count - 2; i+=1)
+        for (int i = 1; i < vertices.Count - 1; i+=1)
         {
             if (!reverseTriangle)
             {
