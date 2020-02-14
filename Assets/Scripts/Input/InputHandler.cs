@@ -18,6 +18,7 @@ public class InputHandler : MonoBehaviour
     public event Action<Vector2,Vector2> OnDualTap;
     public event Action<Vector2> OnSingleHold;
     public event Action<Vector2,Vector2> OnDualHold;
+    public event Action OnRelease; 
     
     
     
@@ -57,8 +58,9 @@ public class InputHandler : MonoBehaviour
                     break;
                 case TouchPhase.Ended:
                     firstSwipe.endPos = firstSwipe.startPos + t.deltaPosition;
-                    if(Input.touchCount == 1)
-                        OnSingleSwipe?.Invoke(firstSwipe);
+                    OnRelease?.Invoke();
+                    if(Input.touchCount == 1){
+                        OnSingleSwipe?.Invoke(firstSwipe);}
                     break;
                 case TouchPhase.Moved:
                     firstSwipe.endPos = firstSwipe.startPos + t.deltaPosition;
@@ -81,6 +83,7 @@ public class InputHandler : MonoBehaviour
                     case TouchPhase.Ended:
                         secondSwipe.endPos = secondSwipe.startPos + t1.deltaPosition;
                         OnDualSwipe?.Invoke(firstSwipe,secondSwipe);
+                        OnRelease?.Invoke();
                         break;
                     case TouchPhase.Moved:
                         secondSwipe.endPos = secondSwipe.startPos + t1.deltaPosition;
