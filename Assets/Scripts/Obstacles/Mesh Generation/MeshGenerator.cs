@@ -2,9 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
 
 public class MeshGenerator : MonoBehaviour
 {
+    private const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     public static Mesh GenerateFromObstacle(Vector3[] positions, Vector3[] normals,float extrusion,float thickness)
     {
         Mesh m = new Mesh();
@@ -42,6 +44,14 @@ public class MeshGenerator : MonoBehaviour
         print("vertices: " + vertices.Count);
         m.SetVertices(vertices);
         m.SetTriangles(triangles.ToArray(),0);
+        string meshName = "";
+        Random r = new Random((int)Time.time);
+        for (int i = 0; i < 8; i++)
+        {
+            meshName += chars[r.Next(0, chars.Length)];
+        }
+
+        m.name =String.Format("mesh ID {0}{1}",r.Next(1000,9999).ToString(),meshName);
         return m;
     }
 }

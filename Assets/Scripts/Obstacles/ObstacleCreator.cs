@@ -90,7 +90,6 @@ public class ObstacleCreator : MonoBehaviour
                         {
                             normals.Add(Vector3.Cross((vertices[vertices.Count - 1] - vertices[0]).normalized, Vector3.forward));
                         }
-//
                         normals.Add(Vector3.Cross(vertices[vertices.Count - 1] - vertices[vertices.Count - 2],
                             Vector3.forward).normalized);
                     }
@@ -101,14 +100,9 @@ public class ObstacleCreator : MonoBehaviour
                         {
                             normals.Add(Vector3.Cross((vertices[vertices.Count - 1] - vertices[0]).normalized, Vector3.forward));
                         }
-//
                         normals.Add(Vector3.Cross(vertices[vertices.Count - 1] - vertices[vertices.Count - 2],
                             Vector3.forward).normalized);
                     }
-
-//                    Vector2 derivative = ((vertices[vertices.Count - 1] - vertices[vertices.Count - 2]).normalized + Vector3.one * 0.001f )- (vertices[vertices.Count - 1] - vertices[vertices.Count - 2]).normalized;
-//                    derivative /= 0.001f;
-//                    normals.Add(derivative.normalized);
                 }
             }
             OnPathUpdated?.Invoke(vertices.ToArray());
@@ -142,6 +136,7 @@ public class ObstacleCreator : MonoBehaviour
             MeshRenderer mr = g.AddComponent<MeshRenderer>();
             MeshFilter mf = g.AddComponent<MeshFilter>();
             MeshCollider col = g.AddComponent<MeshCollider>();
+            Obstacle o = g.AddComponent<Obstacle>();
 
             Mesh generated =
                 MeshGenerator.GenerateFromObstacle(vertices.ToArray(), normals.ToArray(), extrusion, thickness);
@@ -151,6 +146,8 @@ public class ObstacleCreator : MonoBehaviour
             col.sharedMesh = generated;
 
             mr.sharedMaterial = meshMaterial;
+            o.order = obstacleIndex;
+            obstacleIndex++;
         }
         
         vertices = new List<Vector3>();
