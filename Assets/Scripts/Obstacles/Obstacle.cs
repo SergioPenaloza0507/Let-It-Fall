@@ -8,13 +8,14 @@ public class Obstacle : MonoBehaviour
 {
     public int order;
 
-    private void OnCollisionEnter(Collision other)
+    private void OnCollisionStay(Collision other)
     {
         Obstacle oObs = other.gameObject.GetComponent<Obstacle>();
         if (oObs != null)
         {
             if (oObs.order < order)
             {
+                print("dead");
                 Destroy(gameObject);
             }
         }

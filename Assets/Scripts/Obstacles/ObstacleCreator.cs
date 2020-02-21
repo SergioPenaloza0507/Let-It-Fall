@@ -136,7 +136,8 @@ public class ObstacleCreator : MonoBehaviour
             MeshRenderer mr = g.AddComponent<MeshRenderer>();
             MeshFilter mf = g.AddComponent<MeshFilter>();
             MeshCollider col = g.AddComponent<MeshCollider>();
-            Obstacle o = g.AddComponent<Obstacle>();
+            
+            Rigidbody r = g.AddComponent<Rigidbody>();
 
             Mesh generated =
                 MeshGenerator.GenerateFromObstacle(vertices.ToArray(), normals.ToArray(), extrusion, thickness);
@@ -146,8 +147,11 @@ public class ObstacleCreator : MonoBehaviour
             col.sharedMesh = generated;
 
             mr.sharedMaterial = meshMaterial;
+            r.isKinematic = true;
+            Obstacle o = g.AddComponent<Obstacle>();
             o.order = obstacleIndex;
             obstacleIndex++;
+            
         }
         
         vertices = new List<Vector3>();

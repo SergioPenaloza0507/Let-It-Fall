@@ -37,11 +37,11 @@ public class MeshGenerator : MonoBehaviour
             }
 
             reverseTriangle = !reverseTriangle;
-            print(String.Format("New Triangle Added! : ({0},{1},{2})",i-1,i,i+1));
+            //print(String.Format("New Triangle Added! : ({0},{1},{2})",i-1,i,i+1));
         }
 
-        print("triangles: " + triangles.Count);
-        print("vertices: " + vertices.Count);
+        //print("triangles: " + triangles.Count);
+        //print("vertices: " + vertices.Count);
         m.SetVertices(vertices);
         m.SetTriangles(triangles.ToArray(),0);
         string meshName = "";
