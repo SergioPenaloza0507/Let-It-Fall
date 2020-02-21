@@ -29,6 +29,8 @@ public class InputHandler : MonoBehaviour
     private Swipe secondSwipe;
     #endregion
 
+    [Header("Swipe parameters")]
+    [SerializeField] Rect validArea;
     private void Awake()
     {
         firstSwipe = new Swipe();

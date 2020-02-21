@@ -151,6 +151,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22e5d82792479674ea90378f79636bf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  validArea:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
 --- !u!4 &114142860
 Transform:
   m_ObjectHideFlags: 0
@@ -159,7 +165,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 114142858}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.89, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -180,7 +186,7 @@ GameObject:
   m_Layer: 8
   m_Name: Obstacle Receiver
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2800000, guid: 9cb5a58d7db9fbd42b9fc68124dc52ef, type: 3}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -288,10 +294,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6181db64226e7d84494a912d65ddeafb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newVertexDelta: 0.3
+  spacing: 0.1
   collisionLayer:
     serializedVersion: 2
     m_Bits: 256
+  maxAngleThreshold: 0
   extrusion: 0.1
   thickness: 0.1
   meshMaterial: {fileID: 2100000, guid: 2e5a896eae7cf8e45b833aac3280ad22, type: 2}

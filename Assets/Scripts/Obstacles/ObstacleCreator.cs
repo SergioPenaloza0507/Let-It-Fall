@@ -13,13 +13,13 @@ public class ObstacleCreator : MonoBehaviour
     public event Action<Vector3[]> OnPathUpdated;
     
     [Header("Path parameters")]
-    [SerializeField] private float spacing;
+    [SerializeField] private float spacing = 0.1f;
     [SerializeField] private LayerMask collisionLayer;
-    [SerializeField] [Range(0,1)] private float maxAngleThreshold;
+    [SerializeField] [Range(0,1)] private float maxAngleThreshold = 0.6f;
     
     [Header("Mesh parameters")]
-    [SerializeField] private float extrusion;
-    [SerializeField] private float thickness;
+    [SerializeField] private float extrusion = 0.1f;
+    [SerializeField] private float thickness = 0.1f;
     [SerializeField] private Material meshMaterial;
 
     private List<Vector3> vertices;
