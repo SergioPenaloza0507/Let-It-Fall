@@ -49,13 +49,6 @@ public class ObstacleCreator : MonoBehaviour
         InputHandler.Instance.OnSingleHold -= AddVertex;
         InputHandler.Instance.OnRelease -= CreateObstacle;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void FirstVertex(Vector2 touchpos)
     {
         if (vertices.Count <= 0)
@@ -138,10 +131,7 @@ public class ObstacleCreator : MonoBehaviour
             MeshFilter mf = g.AddComponent<MeshFilter>();
             MeshCollider col = g.AddComponent<MeshCollider>();
             
-<<<<<<< HEAD
             Rigidbody r = g.AddComponent<Rigidbody>();
-=======
->>>>>>> obstacle-creation
 
             Mesh generated =
                 MeshGenerator.GenerateFromObstacle(vertices.ToArray(), normals.ToArray(), extrusion, thickness);
@@ -151,15 +141,12 @@ public class ObstacleCreator : MonoBehaviour
             col.sharedMesh = generated;
 
             mr.sharedMaterial = meshMaterial;
-<<<<<<< HEAD
             r.isKinematic = true;
             Obstacle o = g.AddComponent<Obstacle>();
             o.order = obstacleIndex;
             obstacleIndex++;
             
-=======
             ConvertToEntity en = g.AddComponent<ConvertToEntity>();
->>>>>>> obstacle-creation
         }
         
         vertices = new List<Vector3>();

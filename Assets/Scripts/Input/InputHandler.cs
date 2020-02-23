@@ -41,7 +41,10 @@ public class InputHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HandleTouch();
+        if (!GameManager.instance.isPaused)
+        {
+            HandleTouch();
+        }
     }
 
     void HandleTouch()
