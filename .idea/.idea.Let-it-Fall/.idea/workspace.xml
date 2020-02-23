@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="b902ac37-09fe-465d-ace6-34244815408b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Let-it-Fall/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Let-it-Fall/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Obstacles/Obstacle.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Obstacles/Obstacle.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Obstacles/ObstacleCreator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Obstacles/ObstacleCreator.cs" afterDir="false" />
     </list>
+=======
+<<<<<<< Updated upstream
+    <list default="true" id="b902ac37-09fe-465d-ace6-34244815408b" name="Default Changelist" comment="" />
+=======
+    <list default="true" id="b902ac37-09fe-465d-ace6-34244815408b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Let-it-Fall/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Let-it-Fall/.idea/workspace.xml" afterDir="false" />
+    </list>
+>>>>>>> Stashed changes
+>>>>>>> obstacle-creation
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +63,15 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Obstacles/MeshGenerator.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GPU Particles/Algorithm test/ParticleTest.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Feedback/Drawing/DrawingFeedback.cs" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/Assets/Scripts/Input/InputHandler.cs" />
+=======
+<<<<<<< Updated upstream
+=======
+        <option value="$PROJECT_DIR$/Assets/Scripts/Input/InputHandler.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Obstacles/Obstacle.cs" />
+>>>>>>> Stashed changes
+>>>>>>> obstacle-creation
         <option value="$PROJECT_DIR$/Assets/Scripts/Obstacles/Mesh Generation/MeshGenerator.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Obstacles/ObstacleCreator.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Obstacles/Obstacle.cs" />
@@ -112,7 +130,15 @@
       <workItem from="1581420440355" duration="9156000" />
       <workItem from="1581565221592" duration="3291000" />
       <workItem from="1581608439654" duration="14323000" />
+<<<<<<< HEAD
       <workItem from="1582293777253" duration="2308000" />
+=======
+<<<<<<< Updated upstream
+      <workItem from="1582293777253" duration="158000" />
+=======
+      <workItem from="1582293777253" duration="4247000" />
+>>>>>>> Stashed changes
+>>>>>>> obstacle-creation
     </task>
     <servers />
   </component>
