@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using Unity.Entities;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
@@ -142,6 +143,7 @@ public class ObstacleCreator : MonoBehaviour
             MeshRenderer mr = g.AddComponent<MeshRenderer>();
             MeshFilter mf = g.AddComponent<MeshFilter>();
             MeshCollider col = g.AddComponent<MeshCollider>();
+            
 
             Mesh generated =
                 MeshGenerator.GenerateFromObstacle(vertices.ToArray(), normals.ToArray(), extrusion, thickness);
@@ -151,6 +153,7 @@ public class ObstacleCreator : MonoBehaviour
             col.sharedMesh = generated;
 
             mr.sharedMaterial = meshMaterial;
+            ConvertToEntity en = g.AddComponent<ConvertToEntity>();
         }
         
         vertices = new List<Vector3>();
