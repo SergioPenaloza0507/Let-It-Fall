@@ -12,6 +12,12 @@ public class ECSController : MonoBehaviour
     
     static EntityManager em;
     static EntityArchetype sandArchetype;
+    float timer;
+    public float tiempoEntreArena,cantidadGranos;
+    BlobAssetStore blobAssetStore;
+    public GameObject ArenaPrefab;
+    Entity granoArena;
+   
     // Start is called before the first frame update
     public static void Start()
     {
@@ -19,34 +25,36 @@ public class ECSController : MonoBehaviour
     }
     public void Awake()
     {
-
+        blobAssetStore = new BlobAssetStore();
+       GameObjectConversionSettings settings = GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld,blobAssetStore);
+          em = World.DefaultGameObjectInjectionWorld.EntityManager;
+        granoArena = GameObjectConversionUtility.ConvertGameObjectHierarchy(ArenaPrefab,settings);
       
-        em = World.DefaultGameObjectInjectionWorld.EntityManager;
-        sandArchetype = em.CreateArchetype(typeof(Translation),typeof(RenderMeshProxy),typeof(LocalToWorld));
-
-        renderMesh.Value = GameObject.FindObjectOfType<RenderMeshProxy>().Value;
-        createArena(50);
+       
     }
-    public void createArena(int cantidad)
+    int arrayPositioner=0;
+    NativeArray<Entity> granos;
+    public void createArena()
     {
 
 
-        float offset = 00f;
-       
-        for(int i=0; i<cantidad; i++)
-        {
-            
-            Entity newEntityem = em.CreateEntity(sandArchetype);
-            em.AddSharedComponentData(newEntityem, renderMesh.Value);
-            em.SetComponentData(newEntityem, new Translation { Value = new float3(0,1+offset,0) });
-            offset += 1;
-        }
+        granos[arrayPositioner] = em.Instantiate(granoArena);
+        arrayPositioner++;
+        
+
 
 
     }
     // Update is called once per frame
     void Update()
-    {   
-        
+    {
+        timer += Time.deltaTime;
+
+        if(timer>tiempoEntreArena && arrayPositioner<cantidadGranos)
+        {
+
+            createArena();
+
+        }
     }
 }
