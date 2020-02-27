@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using Unity.Entities;
 using UnityEngine;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
+using Unity.Entities;
 
 public class ObstacleCreator : MonoBehaviour
 {
@@ -21,7 +19,7 @@ public class ObstacleCreator : MonoBehaviour
     [Header("Mesh parameters")]
     [SerializeField] private float extrusion = 0.1f;
     [SerializeField] private float thickness = 0.1f;
-    [SerializeField] private Material meshMaterial;
+    [SerializeField] private Material meshMaterial = null;
 
     private List<Vector3> vertices;
     private List<Vector3> normals;
@@ -145,7 +143,7 @@ public class ObstacleCreator : MonoBehaviour
             Obstacle o = g.AddComponent<Obstacle>();
             o.order = obstacleIndex;
             obstacleIndex++;
-            
+
             ConvertToEntity en = g.AddComponent<ConvertToEntity>();
         }
         

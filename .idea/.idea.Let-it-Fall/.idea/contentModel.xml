@@ -35,6 +35,9 @@
             <e p="Swipe.cs" t="Include" />
           </e>
           <e p="Obstacles" t="Include">
+            <e p="ECS" t="Include">
+              <e p="ObstacleComponent.cs" t="Include" />
+            </e>
             <e p="Mesh Generation" t="Include">
               <e p="MeshGenerator.cs" t="Include" />
             </e>
