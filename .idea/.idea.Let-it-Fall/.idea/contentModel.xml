@@ -16,7 +16,7 @@
           <e p="Flow Control" t="Include">
             <e p="GameManager.cs" t="Include" />
           </e>
-          <e p="GPU Particles" t="Include">
+          <e p="GPU Particles(Deprecated)" t="Include">
             <e p="Algorithm test" t="Include">
               <e p="ParticleTest.cs" t="Include" />
               <e p="SurfaceCollider.cs" t="Include" />
