@@ -38,6 +38,9 @@ public class EcsController : MonoBehaviour
 
 
             });
+        em.AddComponentData(newEnt, new ArenaTag
+        {});
+      
 
         cantidadArena -= 1;
         arenaRestante.text = cantidadArena.ToString();
