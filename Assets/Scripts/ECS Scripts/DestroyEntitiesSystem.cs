@@ -23,7 +23,7 @@ public class DestroyEntitiesSystem : MonoBehaviour
         if (EntitiesToDestroy.Count > 0) {
 
             foreach (Entity e in EntitiesToDestroy) {
-                Debug.Log("el");
+
                 em.DestroyEntity(e);
                 EntitiesToDestroy.Clear();
             }

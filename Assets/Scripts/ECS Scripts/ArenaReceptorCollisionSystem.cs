@@ -25,11 +25,14 @@ public class ArenaReceptorCollisionSystem : JobComponentSystem
         {
             if (ReceptorGroup.HasComponent(triggerEvent.Entities.EntityA)) {
                 if (ArenaGroup.HasComponent(triggerEvent.Entities.EntityB)) {
-
-                    
                     ReceptorComponent receptor = ReceptorGroup[triggerEvent.Entities.EntityA];
-                    receptor.arenaRecogida++;
-                    ReceptorGroup[triggerEvent.Entities.EntityA] = receptor;
+                    ArenaComponent arena = ArenaGroup[triggerEvent.Entities.EntityB];
+                    if(receptor.color==arena.color) {
+                        receptor.arenaRecogida++;
+                        ReceptorGroup[triggerEvent.Entities.EntityA] = receptor;
+                    }
+                    
+                   
                     DestroyEntitiesSystem.EntitiesToDestroy.Add(triggerEvent.Entities.EntityB);
 
                     
@@ -42,8 +45,12 @@ public class ArenaReceptorCollisionSystem : JobComponentSystem
                 {
                     
                     ReceptorComponent receptor = ReceptorGroup[triggerEvent.Entities.EntityB];
-                    receptor.arenaRecogida++;
-                    ReceptorGroup[triggerEvent.Entities.EntityB] = receptor;
+                    ArenaComponent arena = ArenaGroup[triggerEvent.Entities.EntityA];
+                    if (receptor.color == arena.color)
+                    {
+                        receptor.arenaRecogida++;
+                        ReceptorGroup[triggerEvent.Entities.EntityB] = receptor;
+                    }
                     DestroyEntitiesSystem.EntitiesToDestroy.Add(triggerEvent.Entities.EntityA);
 
                 }
