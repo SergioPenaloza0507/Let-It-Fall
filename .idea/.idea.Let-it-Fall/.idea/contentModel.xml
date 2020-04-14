@@ -13,7 +13,6 @@
             <e p="DestroyEntitiesSystem.cs" t="Include" />
             <e p="EmisorComponent.cs" t="Include" />
             <e p="Gravity Clusters" t="Include">
-              <e p="ApplyGravitationalForcesSystem.cs" t="Include" />
               <e p="CollisionDEtectionOnGRavitationalSystem.cs" t="Include" />
               <e p="GravityClusterComponent.cs" t="Include" />
               <e p="GravityReceptorComponent.cs" t="Include" />

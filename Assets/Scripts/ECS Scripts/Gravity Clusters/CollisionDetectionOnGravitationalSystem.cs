@@ -12,7 +12,6 @@ using Unity.Physics.Systems;
 using Unity.Transforms;
 using Unity.Collections;
 
-//[UpdateAfter(typeof(EndFramePhysicsSystem))]
 [UpdateAfter(typeof(BuildPhysicsWorld)), UpdateBefore(typeof(StepPhysicsWorld))]
 public class CollisionDetectionOnGravitationalSystem : JobComponentSystem
 {
@@ -55,7 +54,7 @@ public class CollisionDetectionOnGravitationalSystem : JobComponentSystem
                     float3 Aposition = positionGroup[B].Position;
                     PhysicsMass BMass = massGroup[A];
 
-                    float3 dir = Bposition - Aposition;
+                    float3 dir = new float3(Bposition.x - Aposition.x,Bposition.y - Aposition.y, Bposition.z - Aposition.z);
                     float radiusSquared = (dir.x * dir.x) + (dir.y * dir.y) +
                                           (dir.z * dir.z);
                     float3 calculatedPullForce = new float3(0, 0, 0);

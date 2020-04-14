@@ -64,7 +64,7 @@ Material:
     - _DstBlend: 10
     - _EvHorGrade: 5
     - _EventHorizonPower: 0
-    - _EventHorizonThreshold: 0.23
+    - _EventHorizonThreshold: 0
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
