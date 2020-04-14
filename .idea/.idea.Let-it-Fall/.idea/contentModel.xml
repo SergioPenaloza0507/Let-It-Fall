@@ -71,6 +71,9 @@
             <e p="SetFloatToText.cs" t="Include" />
           </e>
         </e>
+        <e p="Shaders" t="Include">
+          <e p="GravitationalCluster.shader" t="Include" />
+        </e>
         <e p="TextMesh Pro" t="Include">
           <e p="Fonts" t="Include">
             <e p="LiberationSans - OFL.txt" t="Include" />
