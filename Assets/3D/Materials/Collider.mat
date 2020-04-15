@@ -59,7 +59,7 @@ Material:
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _DistortionAmp: 3
+    - _DistortionAmp: 1
     - _Distortionfreq: 0.1
     - _DstBlend: 10
     - _EvHorGrade: 5
