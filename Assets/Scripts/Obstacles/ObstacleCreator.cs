@@ -16,10 +16,17 @@ public class ObstacleCreator : MonoBehaviour
     [SerializeField] private LayerMask collisionLayer;
     [SerializeField] [Range(0,1)] private float maxAngleThreshold = 0.6f;
     
+    [Header("Effective Physics Parameters")]
+    [SerializeField] private GameObject gravityPointPrefab;
+    [SerializeField] [Range(.1f, 1)] private float gravitationalClusterDensity;
+    [SerializeField] [Range(.01f, 1)] private float gravitationalClusterScaleMultiplier;
+    
     [Header("Mesh parameters")]
     [SerializeField] private float extrusion = 0.1f;
     [SerializeField] private float thickness = 0.1f;
     [SerializeField] private Material meshMaterial = null;
+    
+    
 
     private List<Vector3> vertices;
     private List<Vector3> normals;
@@ -127,28 +134,38 @@ public class ObstacleCreator : MonoBehaviour
             GameObject g = new GameObject(String.Format("OBSTACLE ({0})", obstacleIndex));
             MeshRenderer mr = g.AddComponent<MeshRenderer>();
             MeshFilter mf = g.AddComponent<MeshFilter>();
-            MeshCollider col = g.AddComponent<MeshCollider>();
-            
+
             Rigidbody r = g.AddComponent<Rigidbody>();
 
             Mesh generated =
                 MeshGenerator.GenerateFromObstacle(vertices.ToArray(), normals.ToArray(), extrusion, thickness);
 
             mf.mesh = generated;
-
-            col.sharedMesh = generated;
+            
 
             mr.sharedMaterial = meshMaterial;
             r.isKinematic = true;
             Obstacle o = g.AddComponent<Obstacle>();
             o.order = obstacleIndex;
             obstacleIndex++;
+        }
 
-            ConvertToEntity en = g.AddComponent<ConvertToEntity>();
+        
+        for (int i = 0; i < vertices.Count; i++)
+        {
+            try
+            {
+                GameObject g = Instantiate(gravityPointPrefab, vertices[i * (int) (1 / gravitationalClusterDensity)],
+                    Quaternion.identity);
+            }
+            catch (Exception error)
+            {
+                
+            }
         }
         
-        vertices = new List<Vector3>();
-        normals = new List<Vector3>();
+        vertices.Clear();
+        normals.Clear();
     }
 
     bool CastRayFromCam(Vector2 touchPos,out RaycastHit h)
