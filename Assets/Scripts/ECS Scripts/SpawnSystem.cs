@@ -35,7 +35,7 @@ public class SpawnSystem : MonoBehaviour
         GameObjectConversionSettings settings = GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, blobAssetStore);
 
 
-        sandArchetype = em.CreateArchetype(typeof(RenderMesh), typeof(Translation), typeof(Rotation),typeof(RenderBounds),typeof(LocalToWorld),typeof(ArenaComponent));
+        sandArchetype = em.CreateArchetype(typeof(RenderMesh), typeof(Translation), typeof(Rotation),typeof(RenderBounds),typeof(LocalToWorld),typeof(ArenaComponent),typeof(GravityReceptorComponent));
 
         sandEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(sandPrefab, settings);
 
@@ -45,6 +45,7 @@ public class SpawnSystem : MonoBehaviour
 
             emisorsEntities[i] = em.Instantiate(emisorEntity);
             em.AddComponentData(emisorsEntities[i], new EmisorComponent());
+   
             em.SetComponentData(emisorsEntities[i], new Translation { Value = new float3(offset,0,0) });
             em.SetComponentData(emisorsEntities[i], new EmisorComponent {color=emisores[i], activo=true});
             offset+=3;
@@ -69,11 +70,9 @@ public class SpawnSystem : MonoBehaviour
                     int _color = em.GetComponentData<EmisorComponent>(emisorsEntities[i]).color;
                     Entity newArena = em.Instantiate(sandEntity);
                     em.AddComponentData(newArena, new ArenaComponent { color = _color });
+                    em.AddComponentData(newArena, new GravityReceptorComponent());
                     em.AddSharedComponentData(newArena, new RenderMesh { material = colores[_color], mesh = arenaMesh });
                     em.SetComponentData(newArena, new Translation { Value = em.GetComponentData<Translation>(emisorsEntities[i]).Value, });
-
-
-
                 }
                 timer = 0;
             }
