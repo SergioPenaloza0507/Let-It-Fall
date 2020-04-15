@@ -5,14 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Performance Test(Particle system)/Performance test (Particle
-      system).unity
-    guid: 6cf25232124843d42b4573185f31c4cb
   - enabled: 1
-    path: Assets/Scenes/Obstacle creation/Obstacle input tests.unity
-    guid: 004af2b12b6223843b5eb761d58ae99a
+    path: Assets/Scenes/GravitationalCLusters Tests/Main Menu.unity
+    guid: 339c7b409c253b4429aed0c5f2f1c2d0
   - enabled: 1
-    path: Assets/Scenes/GameTesting.unity
-    guid: 9c5ade40f388a9e4aac4a88d05ae1a61
+    path: Assets/Scenes/GravitationalCLusters Tests/1.unity
+    guid: 3c8e5c8d4547c2e45b94f86947e0c916
+  - enabled: 1
+    path: Assets/Scenes/GravitationalCLusters Tests/2.unity
+    guid: fe75bd1932e4cb14aba024b38553b4eb
+  - enabled: 1
+    path: Assets/Scenes/GravitationalCLusters Tests/3.unity
+    guid: eed190eb5f7177143a11fff381d6e7a9
   m_configObjects: {}
