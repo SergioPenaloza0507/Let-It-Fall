@@ -435,7 +435,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 701834668}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18, y: -6.5384903, z: -5}
+  m_LocalPosition: {x: -31.4, y: -6.5384903, z: -5}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -574,8 +574,8 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 1a28b80d06e65aa4daa32b4da366727a, type: 2}
   - {fileID: 2100000, guid: 050a7690c4b0c39409d4830b56ab4db3, type: 2}
   emisores: 01000000
-  tiempoEntreSpawns: 0.1
-  offset: 0
+  tiempoEntreSpawns: 0.5
+  offset: -7
 --- !u!81 &964505092
 AudioListener:
   m_ObjectHideFlags: 0

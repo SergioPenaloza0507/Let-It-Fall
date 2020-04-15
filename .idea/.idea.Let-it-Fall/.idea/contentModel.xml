@@ -64,6 +64,9 @@
           <e p="Testing" t="Include">
             <e p="ParticleController.cs" t="Include" />
           </e>
+          <e p="UI" t="Include">
+            <e p="GoToLevel.cs" t="Include" />
+          </e>
           <e p="Utilities" t="Include">
             <e p="Delegates.cs" t="Include" />
             <e p="FPSToText.cs" t="Include" />
