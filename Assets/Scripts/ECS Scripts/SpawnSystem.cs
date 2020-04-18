@@ -21,7 +21,7 @@ public class SpawnSystem : MonoBehaviour
     Entity sandEntity,receptorEntity,emisorEntity;
     Entity [] emisorsEntities;
     EntityManager em;
-    List<Entity> arena;
+    NativeList<Entity> arena;
     
     BlobAssetStore blobAssetStore;
     EntityArchetype sandArchetype;
@@ -29,7 +29,7 @@ public class SpawnSystem : MonoBehaviour
     void Start()
     {
         emisorsEntities = new Entity[emisores.Length];
-        arena = new List<Entity>();
+        arena = new NativeList<Entity>();
         em = World.DefaultGameObjectInjectionWorld.EntityManager;
         blobAssetStore = new BlobAssetStore();
         GameObjectConversionSettings settings = GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, blobAssetStore);
@@ -45,9 +45,8 @@ public class SpawnSystem : MonoBehaviour
 
             emisorsEntities[i] = em.Instantiate(emisorEntity);
             em.AddComponentData(emisorsEntities[i], new EmisorComponent());
-   
             em.SetComponentData(emisorsEntities[i], new Translation { Value = new float3(offset,0,0) });
-            em.SetComponentData(emisorsEntities[i], new EmisorComponent {color=emisores[i], activo=true});
+            em.SetComponentData(emisorsEntities[i], new EmisorComponent {color=emisores[i], activo=true, arenaRestante=100});
             offset+=3;
         }
         Entity newReceptor = em.Instantiate(receptorEntity);
@@ -58,21 +57,29 @@ public class SpawnSystem : MonoBehaviour
     float timer=0;
     void Update()
     {
-
+        em.SetComponentData<Translation>(emisorsEntities[0], new Translation { Value = emisorPrefab.transform.position }) ;
         timer += Time.deltaTime;
 
         if (timer > tiempoEntreSpawns)
         {
             for (int i = 0; i < emisorsEntities.Length; i++)
             {
-                if (em.GetComponentData<EmisorComponent>(emisorsEntities[i]).activo)
+                if (em.GetComponentData<EmisorComponent>(emisorsEntities[i]).activo && em.GetComponentData<EmisorComponent>(emisorsEntities[i]).arenaRestante>0)
                 {
                     int _color = em.GetComponentData<EmisorComponent>(emisorsEntities[i]).color;
                     Entity newArena = em.Instantiate(sandEntity);
+                    PhysicsVelocity sandvelocity = em.GetComponentData<PhysicsVelocity>(newArena);
+                    sandvelocity.Linear = Vector3.zero;
+                    
+                    em.SetComponentData(newArena,sandvelocity);
                     em.AddComponentData(newArena, new ArenaComponent { color = _color });
                     em.AddComponentData(newArena, new GravityReceptorComponent());
                     em.AddSharedComponentData(newArena, new RenderMesh { material = colores[_color], mesh = arenaMesh });
                     em.SetComponentData(newArena, new Translation { Value = em.GetComponentData<Translation>(emisorsEntities[i]).Value, });
+                    arena.Add(newArena);
+                    EmisorComponent emisor=  em.GetComponentData<EmisorComponent>(emisorsEntities[i]);
+                    emisor.arenaRestante -= 1;
+                    em.SetComponentData<EmisorComponent>(emisorsEntities[i], emisor);
                 }
                 timer = 0;
             }
