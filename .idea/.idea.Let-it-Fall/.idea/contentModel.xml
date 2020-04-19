@@ -20,6 +20,7 @@
             <e p="Receptor.cs" t="Include" />
             <e p="ReceptorComponent.cs" t="Include" />
             <e p="SpawnSystem.cs" t="Include" />
+            <e p="UIUpdateSystem.cs" t="Include" />
           </e>
           <e p="Feedback" t="Include">
             <e p="Drawing" t="Include">

@@ -30,45 +30,59 @@ public class CollisionDetectionOnGravitationalSystem : JobComponentSystem
     {
 
         public PhysicsWorld pw;
-        
+
         public ComponentDataFromEntity<GravityClusterComponent> clusterGroup;
-        [ReadOnly]public ComponentDataFromEntity<GravityReceptorComponent> receptorGroup;
+        [ReadOnly] public ComponentDataFromEntity<GravityReceptorComponent> receptorGroup;
 
         public ComponentDataFromEntity<LocalToWorld> positionGroup;
         public ComponentDataFromEntity<PhysicsMass> massGroup;
-        
+
         public void Execute(TriggerEvent triggerEvent)
         {
             Entity A = triggerEvent.Entities.EntityA;
             Entity B = triggerEvent.Entities.EntityB;
-            
-            
-            
+
+
+
             if (clusterGroup.Exists(B) && positionGroup.Exists(B))
             {
-                
-                if (receptorGroup.Exists(A) && positionGroup.Exists(A) && massGroup.Exists(A))
+                if (positionGroup.Exists(A))
                 {
-                    GravityClusterComponent ACluster = clusterGroup[B];
-                    float3 Bposition = positionGroup[A].Position;
-                    float3 Aposition = positionGroup[B].Position;
-                    PhysicsMass BMass = massGroup[A];
 
-                    float3 dir = new float3(Bposition.x - Aposition.x,Bposition.y - Aposition.y, Bposition.z - Aposition.z);
-                    float radiusSquared = (dir.x * dir.x) + (dir.y * dir.y) +
-                                          (dir.z * dir.z);
-                    float3 calculatedPullForce = new float3(0, 0, 0);
-                    
-                    calculatedPullForce = -(dir/Mathf.Sqrt(radiusSquared)) * ((GRAVITATIONAL_CONSTANT * (ACluster.mass * BMass.InverseMass))/radiusSquared);
+                    if (receptorGroup.Exists(A) && massGroup.Exists(A))
+                    {
+                        GravityClusterComponent ACluster = clusterGroup[B];
+                        float3 Bposition = positionGroup[A].Position;
+                        float3 Aposition = positionGroup[B].Position;
+                        PhysicsMass BMass = massGroup[A];
 
-                    calculatedPullForce.z = 0;
-                    try
-                    {
-                        pw.ApplyLinearImpulse(pw.GetRigidBodyIndex(A), calculatedPullForce);
-                    }
-                    catch (Exception error)
-                    {
-                        
+                        float3 dir = new float3(Bposition.x - Aposition.x, Bposition.y - Aposition.y,
+                            Bposition.z - Aposition.z);
+                        float radiusSquared = (dir.x * dir.x) + (dir.y * dir.y) +
+                                              (dir.z * dir.z);
+                        float3 calculatedPullForce = new float3(0, 0, 0);
+
+                        calculatedPullForce = -(dir / Mathf.Sqrt(radiusSquared)) *
+                                              ((GRAVITATIONAL_CONSTANT * (ACluster.mass * BMass.InverseMass)) /
+                                               radiusSquared);
+
+                        calculatedPullForce.z = 0;
+                        try
+                        {
+                            if (ACluster.biasedPointTarget.Equals(float3.zero))
+                            {
+                                pw.ApplyLinearImpulse(pw.GetRigidBodyIndex(A), calculatedPullForce);
+                            }
+                            else
+                            {
+                                float3 dirToClust = ACluster.biasedPointTarget - Bposition;
+                                pw.SetLinearVelocity(pw.GetRigidBodyIndex(A),ACluster.biasedSpeed * dirToClust);
+                            }
+                        }
+                        catch (Exception error)
+                        {
+
+                        }
                     }
                 }
             }
@@ -76,19 +90,19 @@ public class CollisionDetectionOnGravitationalSystem : JobComponentSystem
     }
 
     protected override JobHandle OnUpdate(JobHandle inputDeps)
-    {
-        var deps = JobHandle.CombineDependencies(inputDeps, buildPhysicsWorld.FinalJobHandle);
-        
-        JobHandle job = new CollissionDetectionGravitationalRadius()
         {
-            pw = buildPhysicsWorld.PhysicsWorld,
-            clusterGroup = GetComponentDataFromEntity<GravityClusterComponent>(),
-            receptorGroup = GetComponentDataFromEntity<GravityReceptorComponent>(),
-            positionGroup = GetComponentDataFromEntity<LocalToWorld>(),
-            massGroup = GetComponentDataFromEntity<PhysicsMass>()
-        }.Schedule(stepPhysicsWorld.Simulation, ref buildPhysicsWorld.PhysicsWorld, deps);
+            var deps = JobHandle.CombineDependencies(inputDeps, buildPhysicsWorld.FinalJobHandle);
         
-        job.Complete();
-        return job;
-    }
+            JobHandle job = new CollissionDetectionGravitationalRadius()
+            {
+                pw = buildPhysicsWorld.PhysicsWorld,
+                clusterGroup = GetComponentDataFromEntity<GravityClusterComponent>(),
+                receptorGroup = GetComponentDataFromEntity<GravityReceptorComponent>(),
+                positionGroup = GetComponentDataFromEntity<LocalToWorld>(),
+                massGroup = GetComponentDataFromEntity<PhysicsMass>()
+            }.Schedule(stepPhysicsWorld.Simulation, ref buildPhysicsWorld.PhysicsWorld, deps);
+        
+            job.Complete();
+            return job;
+        }
 }

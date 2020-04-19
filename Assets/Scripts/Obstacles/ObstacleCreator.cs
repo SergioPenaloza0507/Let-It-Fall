@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
 using Unity.Entities;
+using Unity.Mathematics;
 
 public class ObstacleCreator : MonoBehaviour
 {
@@ -155,8 +156,27 @@ public class ObstacleCreator : MonoBehaviour
         {
             try
             {
+                
+                Vector3 v = vertices[i];
+                Vector3 v1 = Vector3.one;
+                if (i > 0)
+                {
+                    v1 = (vertices[i + 1]);
+                }
+                if(i >= vertices.Count - 1)
+                {
+                    v1 = v + (v - vertices[i - 1]);
+                }
+
                 GameObject g = Instantiate(gravityPointPrefab, vertices[i * (int) (1 / gravitationalClusterDensity)],
                     Quaternion.identity);
+
+                GravitationalClusterHybridHandler gh = g.GetComponent<GravitationalClusterHybridHandler>();
+                var gravityClusterComponent = gh.Value;
+                gravityClusterComponent.biasedPointTarget = new float3(v1.x,v1.y,v1.z);
+                gh.Value = gravityClusterComponent;
+
+                g.AddComponent<ConvertToEntity>();
             }
             catch (Exception error)
             {

@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 6829960255531196744}
   - component: {fileID: 6829960255531196745}
   - component: {fileID: 6829960255531196746}
-  - component: {fileID: 6829960255531196747}
   m_Layer: 0
   m_Name: GravityInvisible
   m_TagString: Untagged
@@ -94,7 +93,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 6
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6829960255531196745
 MonoBehaviour:
@@ -121,21 +120,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SerializedData:
-    biasedDirection:
+    biasedPointTarget:
       x: 0
       y: 0
       z: 0
+    biasedSpeed: 5
     mass: 0.5
---- !u!114 &6829960255531196747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6829960255531196748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea7d7495833204790ba1d3a8755397f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ConversionMode: 0
