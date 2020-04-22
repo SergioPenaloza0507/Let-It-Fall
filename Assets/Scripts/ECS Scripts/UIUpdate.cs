@@ -35,7 +35,7 @@ public class UIUpdate : MonoBehaviour
         {
            
             timer += Time.deltaTime;
-            if (timer > 4 && UIUpdateSystem.instance.lvlCompleted == false)
+            if (timer > 6 && UIUpdateSystem.instance.lvlCompleted == false)
             {
 
                 LoseCanvas.enabled = true;

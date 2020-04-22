@@ -73,6 +73,7 @@ public class SpawnSystem : MonoBehaviour
                     PhysicsVelocity sandvelocity = em.GetComponentData<PhysicsVelocity>(newArena);
                     sandvelocity.Linear = Vector3.zero;
                     
+                    
                     em.SetComponentData(newArena,sandvelocity);
                     em.AddComponentData(newArena, new ArenaComponent { color = _color });
                     em.AddComponentData(newArena, new GravityReceptorComponent());
