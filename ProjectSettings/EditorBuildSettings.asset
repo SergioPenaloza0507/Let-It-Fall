@@ -6,15 +6,27 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/GravitationalCLusters Tests/Main Menu.unity
+    path: Assets/Scenes/OnUse/Main Menu.unity
     guid: 339c7b409c253b4429aed0c5f2f1c2d0
   - enabled: 1
-    path: Assets/Scenes/GravitationalCLusters Tests/1.unity
+    path: Assets/Scenes/OnUse/1.unity
     guid: 3c8e5c8d4547c2e45b94f86947e0c916
   - enabled: 1
-    path: Assets/Scenes/GravitationalCLusters Tests/2.unity
-    guid: fe75bd1932e4cb14aba024b38553b4eb
+    path: Assets/Scenes/OnUse/2.unity
+    guid: 10942294dacf51a41a86f3954eb5e26b
   - enabled: 1
-    path: Assets/Scenes/GravitationalCLusters Tests/3.unity
-    guid: eed190eb5f7177143a11fff381d6e7a9
+    path: Assets/Scenes/OnUse/3.unity
+    guid: 2e9d059e0eaa52e45ad38c7305cf54b1
+  - enabled: 1
+    path: Assets/Scenes/OnUse/4.unity
+    guid: bef335e9b3d204841b3f44b30e0db2f6
+  - enabled: 1
+    path: Assets/Scenes/OnUse/5.unity
+    guid: 1e5c895df71564342912000d82b1f1ea
+  - enabled: 1
+    path: Assets/Scenes/OnUse/6.unity
+    guid: a30585b63ecc9a74491a6368c329b53e
+  - enabled: 1
+    path: Assets/Scenes/OnUse/7.unity
+    guid: dcd2fc4debf645d4da25de6568401d90
   m_configObjects: {}
