@@ -22,19 +22,25 @@ public class UIUpdate : MonoBehaviour
         arenaEmisor.text = UIUpdateSystem.instance.arenaEmisor.ToString();
 
         arenaReceptor.text = (UIUpdateSystem.instance.arenaReceptor).ToString();
-        if (UIUpdateSystem.instance.lvlCompleted) {
+        if (UIUpdateSystem.instance.lvlCompleted)
+        {
 
-            WinCanvas.enabled = true ;
-        
+            WinCanvas.enabled = true;
+
+        }
+        else { WinCanvas.enabled = false;
+            Debug.Log("as");
         }
         if (UIUpdateSystem.instance.noMoreArena )
         {
            
             timer += Time.deltaTime;
-            if (timer > 4 && UIUpdateSystem.instance.lvlCompleted== false) {
+            if (timer > 4 && UIUpdateSystem.instance.lvlCompleted == false)
+            {
 
                 LoseCanvas.enabled = true;
             }
+            else { LoseCanvas.enabled = false; }
 
            
 

@@ -59,7 +59,7 @@ public class DestroyArena : JobComponentSystem
 
             }).Run();
 
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+          //  SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         return default;

@@ -39,9 +39,14 @@ public class UIUpdateSystem : ComponentSystem
             ReceptorComponent receptor = em.GetComponentData<ReceptorComponent>(e);
             arenaReceptor = receptor.arenaRecogida;
 
-            if (arenaReceptor > 150) {
+            if (arenaReceptor > 150)
+            {
 
                 lvlCompleted = true;
+            }
+            else
+            {
+                lvlCompleted = false;
             }
         });
 

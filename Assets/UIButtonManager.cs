@@ -23,10 +23,10 @@ public class UIButtonManager : MonoBehaviour
         DestroyArena.levelRestarted = true;
        
        // levelReseted();
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void backToMenu (){
-
+        DestroyArena.levelRestarted = true;
         SceneManager.LoadScene(0);
     }
     public void GoToLevels() {
