@@ -21,7 +21,7 @@ public class SpawnSystem : MonoBehaviour
     Entity sandEntity,receptorEntity,emisorEntity;
     Entity [] emisorsEntities;
     EntityManager em;
-    NativeList<Entity> arena;
+    
     
     BlobAssetStore blobAssetStore;
     EntityArchetype sandArchetype;
@@ -29,7 +29,7 @@ public class SpawnSystem : MonoBehaviour
     void Start()
     {
         emisorsEntities = new Entity[emisores.Length];
-        arena = new NativeList<Entity>();
+        
         em = World.DefaultGameObjectInjectionWorld.EntityManager;
         blobAssetStore = new BlobAssetStore();
         GameObjectConversionSettings settings = GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, blobAssetStore);
@@ -45,11 +45,13 @@ public class SpawnSystem : MonoBehaviour
 
             emisorsEntities[i] = em.Instantiate(emisorEntity);
             em.AddComponentData(emisorsEntities[i], new EmisorComponent());
+            
             em.SetComponentData(emisorsEntities[i], new Translation { Value = new float3(offset,0,0) });
             em.SetComponentData(emisorsEntities[i], new EmisorComponent {color=emisores[i], activo=true, arenaRestante=100});
             offset+=3;
         }
         Entity newReceptor = em.Instantiate(receptorEntity);
+        em.AddComponentData(newReceptor, new SimpleCollisionDetector { collisionDetectionRadius=5 });
         em.AddComponentData(newReceptor, new ReceptorComponent { });
     }
 
@@ -76,13 +78,15 @@ public class SpawnSystem : MonoBehaviour
                     em.AddComponentData(newArena, new GravityReceptorComponent());
                     em.AddSharedComponentData(newArena, new RenderMesh { material = colores[_color], mesh = arenaMesh });
                     em.SetComponentData(newArena, new Translation { Value = em.GetComponentData<Translation>(emisorsEntities[i]).Value, });
-                    arena.Add(newArena);
+                   
                     EmisorComponent emisor=  em.GetComponentData<EmisorComponent>(emisorsEntities[i]);
                     emisor.arenaRestante -= 1;
                     em.SetComponentData<EmisorComponent>(emisorsEntities[i], emisor);
                 }
                 timer = 0;
             }
+
+           // arena.Dispose();
         }
 
 
@@ -97,8 +101,8 @@ public class SpawnSystem : MonoBehaviour
             });
 
         }
-
+        
     }
 
-
+    
 }

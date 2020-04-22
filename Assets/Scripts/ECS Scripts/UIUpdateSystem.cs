@@ -7,22 +7,30 @@ using Unity.Transforms;
 using Unity.Mathematics;
 public class UIUpdateSystem : ComponentSystem
 {
-    [SerializeField] TextMeshProUGUI textoEmisor, textoReceptor,textoPuntaje;
+    public float arenaEmisor,arenaReceptor;
     EntityManager em;
-   
-    protected override void OnUpdate()
-    {
-        Entities.WithAll<EmisorComponent, Translation>().ForEach((Entity e) =>
-        {
-            Translation posicion = em.GetComponentData<Translation>(e);
-            float3 pos = posicion.Value;
-            textoEmisor.transform.position = new Vector3(pos.x,pos.y,pos.z);
-        });
-    }
+    public static UIUpdateSystem instance;
     protected override void OnCreate()
     {
-        textoEmisor = GameObject.FindGameObjectWithTag("emisor").GetComponent<TextMeshProUGUI>();
+        instance = this;
         em = World.DefaultGameObjectInjectionWorld.EntityManager;
     }
+    protected override void OnUpdate()
+    {
+
+        
+        Entities.WithAll<EmisorComponent, Translation>().ForEach((Entity e) =>
+        {
+           EmisorComponent emisor= em.GetComponentData<EmisorComponent>(e);
+            arenaEmisor = emisor.arenaRestante;
+        });
+
+        Entities.WithAll<ReceptorComponent, Translation>().ForEach((Entity e) =>
+        {
+            ReceptorComponent receptor = em.GetComponentData<ReceptorComponent>(e);
+            arenaReceptor = receptor.arenaRecogida;
+        });
+    }
+    
    
 }
