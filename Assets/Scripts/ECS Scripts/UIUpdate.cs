@@ -5,12 +5,14 @@ using TMPro;
 public class UIUpdate : MonoBehaviour
 {
     public TextMeshProUGUI arenaEmisor,arenaReceptor;
-   
+    public Canvas WinCanvas, LoseCanvas;
+    float timer;
     // Start is called before the first frame update
     void Start()
     {
-       
 
+        WinCanvas.enabled = false;
+        LoseCanvas.enabled =false;
 
     }
 
@@ -20,5 +22,22 @@ public class UIUpdate : MonoBehaviour
         arenaEmisor.text = UIUpdateSystem.instance.arenaEmisor.ToString();
 
         arenaReceptor.text = (UIUpdateSystem.instance.arenaReceptor).ToString();
+        if (UIUpdateSystem.instance.lvlCompleted) {
+
+            WinCanvas.enabled = true ;
+        
+        }
+        if (UIUpdateSystem.instance.noMoreArena )
+        {
+           
+            timer += Time.deltaTime;
+            if (timer > 4 && UIUpdateSystem.instance.lvlCompleted== false) {
+
+                LoseCanvas.enabled = true;
+            }
+
+           
+
+        }
     }
 }

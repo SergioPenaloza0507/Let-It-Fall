@@ -35,8 +35,12 @@ public class SimpleCollisionDetectionSystem :JobComponentSystem
                 r.arenaRecogida++;
                 em.SetComponentData<ReceptorComponent>(receptorGroup.ToEntityArray(Unity.Collections.Allocator.TempJob)[0],r);
             }
-         
-            
+            if (distance > 300)
+            {
+                em.DestroyEntity(e);
+            }
+
+
         }
         
 
