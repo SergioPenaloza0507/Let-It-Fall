@@ -5,6 +5,7 @@ using Unity.Jobs;
 using Unity.Entities;
 using Unity.Rendering;
 using UnityEngine.SceneManagement;
+using Unity.Transforms;
 public class DestroyArena : JobComponentSystem
 {// job para destruir las entidades con el componente DestryThisEntity
     EndSimulationEntityCommandBufferSystem ecbSystem;
@@ -36,29 +37,14 @@ public class DestroyArena : JobComponentSystem
 
         if (levelRestarted) { 
 
-            Entities.WithoutBurst().WithAll<ArenaComponent>().ForEach((Entity entity) =>
+            Entities.WithoutBurst().WithAll<Translation>().ForEach((Entity entity) =>
             {
                
                 ecb.DestroyEntity(entity);
 
 
             }).Run();
-            Entities.WithoutBurst().WithAll<ReceptorComponent>().ForEach((Entity entity) =>
-            {
-                ecb.DestroyEntity(entity);
-               
-            }).Run();
-            Entities.WithoutBurst().WithAll<GravityClusterComponent>().ForEach((Entity entity) =>
-            {
-                ecb.DestroyEntity(entity);
-
-            }).Run();
-            Entities.WithoutBurst().WithAll<EmisorComponent>().ForEach((Entity entity) =>
-            {
-                ecb.DestroyEntity(entity);
-
-            }).Run();
-
+            
           //  SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 

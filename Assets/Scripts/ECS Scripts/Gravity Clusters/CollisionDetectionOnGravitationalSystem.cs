@@ -62,6 +62,7 @@ public class CollisionDetectionOnGravitationalSystem : JobComponentSystem
                     calculatedPullForce = -(dir/Mathf.Sqrt(radiusSquared)) * ((GRAVITATIONAL_CONSTANT * (ACluster.mass * BMass.InverseMass))/radiusSquared);
 
                     calculatedPullForce.z = 0;
+                    calculatedPullForce.y = 0.02f;
                     try
                     {
                         pw.ApplyLinearImpulse(pw.GetRigidBodyIndex(A), calculatedPullForce);

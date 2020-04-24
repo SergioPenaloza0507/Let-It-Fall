@@ -35,24 +35,34 @@ public class SpawnSystem : MonoBehaviour
         GameObjectConversionSettings settings = GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, blobAssetStore);
 
 
-        sandArchetype = em.CreateArchetype(typeof(RenderMesh), typeof(Translation), typeof(Rotation),typeof(RenderBounds),typeof(LocalToWorld),typeof(ArenaComponent),typeof(GravityReceptorComponent));
+        sandArchetype = em.CreateArchetype(typeof(RenderMesh), typeof(Translation), typeof(Rotation),typeof(RenderBounds),typeof(LocalToWorld),typeof(ArenaComponent),typeof(GravityReceptorComponent),typeof(PhysicsVelocity));
 
-        sandEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(sandPrefab, settings);
+         sandEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(sandPrefab, settings);
+        //sandEntity = em.CreateEntity(sandArchetype);
+        if (receptorPrefab != null) {
 
-        receptorEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(receptorPrefab, settings);
-        emisorEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(emisorPrefab,settings);
-        for (int i=0; i< emisorsEntities.Length;i++) {
-
-            emisorsEntities[i] = em.Instantiate(emisorEntity);
-            em.AddComponentData(emisorsEntities[i], new EmisorComponent());
-            
-            em.SetComponentData(emisorsEntities[i], new Translation { Value = new float3(offset,0,0) });
-            em.SetComponentData(emisorsEntities[i], new EmisorComponent {color=emisores[i], activo=true, arenaRestante=100});
-            offset+=3;
+            receptorEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(receptorPrefab, settings);
+            Entity newReceptor = em.Instantiate(receptorEntity);
+            em.AddComponentData(newReceptor, new SimpleCollisionDetector { collisionDetectionRadius = 5 });
+            em.AddComponentData(newReceptor, new ReceptorComponent { });
         }
-        Entity newReceptor = em.Instantiate(receptorEntity);
-        em.AddComponentData(newReceptor, new SimpleCollisionDetector { collisionDetectionRadius=5 });
-        em.AddComponentData(newReceptor, new ReceptorComponent { });
+        if (emisorPrefab != null)
+        {
+            emisorEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(emisorPrefab, settings);
+            for (int i = 0; i < emisorsEntities.Length; i++)
+            {
+
+                emisorsEntities[i] = em.Instantiate(emisorEntity);
+                em.AddComponentData(emisorsEntities[i], new EmisorComponent());
+
+                em.SetComponentData(emisorsEntities[i], new Translation { Value = new float3(offset, 0, 0) });
+                em.SetComponentData(emisorsEntities[i], new EmisorComponent { color = emisores[i], activo = true, arenaRestante = 100 });
+                offset += 3;
+            }
+        }
+       
+       
+        
     }
 
     // Update is called once per frame
